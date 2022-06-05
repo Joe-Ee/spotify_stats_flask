@@ -1,0 +1,128 @@
+{% extends '_layout.html' %}
+
+{% block body %}
+
+
+<ul class="nav  justify-content-center">
+    <li class="smallbg">
+      <button class="nav-link active col" onclick = "display('weeks')">Last 4 Weeks</button>
+    </li>
+    <li class="smallbg">
+      <button class="nav-link col" onclick = "display('months')">Last 6 Months</button>
+    </li>
+    <li class="smallbg">
+      <button class="nav-link col" onclick = "display('AT')">All Time</button>
+    </li>
+   
+  </ul>
+
+  <ul>
+    <div style = "display: block;" id = 'weeks'>
+      {% for i in range(50) %}
+      <li>
+    
+        <table class = "centerTab">
+          <col >
+          <col style="width:5%">
+          <col style="width:50%">
+          <col style="width:40%">
+          <td><p class = "tableCols" > {{i + 1}} </p></td>
+        <td><img src = "{{ artists[0]['items'][i]['images'][2]['url'] }}" width = 200 height = 200 class = "tableCols"></td> 
+          <td> <p class = "tableCols"> {{ artists[0]['items'][i]['name'] }}</p></td> <!--name-->
+          <td> <p class = "tableCols" > {{ artists[0]['items'][i]['popularity'] }}</p></td> <!-- artist-->
+        </table>
+     
+      </li>
+
+      
+      {% endfor %}
+</div>
+</ul>
+
+<ul>
+  <div style = "display: none;" id = 'months'>
+    {% for i in range(50) %}
+    <li>
+  
+      <table class = "centerTab">
+        <col >
+        <col style="width:5%">
+        <col style="width:50%">
+        <col style="width:40%">
+        <td><p class = "tableCols" > {{i + 1}} </p></td>
+      <td><img src = "{{ artists[1]['items'][i]['images'][2]['url'] }}" width = 200 height = 200 class = "tableCols"></td> 
+        <td> <p class = "tableCols"> {{ artists[1]['items'][i]['name'] }}</p></td> <!--name-->
+        <td> <p class = "tableCols" > {{ artists[1]['items'][i]['popularity'] }}</p></td> <!-- artist-->
+      </table>
+   
+    </li>
+
+{% endfor %}
+  </div>
+  </ul>
+
+  <ul>
+    <div style = "display: none;" id = 'AT'>
+      {% for i in range(50) %}
+      <li>
+    
+        <table class = "centerTab">
+          <col >
+          <col style="width:5%">
+          <col style="width:50%">
+          <col style="width:40%">
+          <td><p class = "tableCols" > {{i + 1}} </p></td>
+          <td><img src = "{{ artists[2]['items'][i]['images'][2]['url'] }}" width = 200 height = 200 class = "tableCols"></td> <!-- picture-->
+          <td> <p class = "tableCols"> {{ artists[2]['items'][i]['name'] }}</p></td> <!--name-->
+          <td> <p class = "tableCols" > {{ artists[2]['items'][i]['popularity'] }}</p></td> <!-- artist-->
+        </table>
+     
+      </li>
+  
+  {% endfor %}
+    </div>
+    </ul>
+   
+
+
+
+  <script>
+    function display(fun){
+      //get the ids of the divs
+      
+      var weeks = document.getElementById('weeks');
+      var months = document.getElementById('months');
+      var AT = document.getElementById('AT');
+      //get each of their displays. 
+      var weeksDis = weeks.style.display;
+      var monthsDis = months.style.display;
+      var ATDis = AT.style.display;
+  
+      if( fun === "weeks"){
+     //if it is not visible then make it visible
+        if(weeksDis !== 'block'){
+  
+          weeks.style.display = 'block';
+          months.style.display = 'none';
+          AT.style.display = 'none';
+        }
+      }
+      else if( fun == "months"){
+          if(monthsDis !== 'block'){
+  
+            weeks.style.display = 'none';
+            months.style.display = 'block';
+            AT.style.display = 'none';
+        }
+      }
+      else{
+        weeks.style.display = 'none';
+        months.style.display = 'none';
+        AT.style.display = 'block';
+      }
+    }
+  
+  
+  </script>
+
+{% endblock %}
