@@ -2,4 +2,27 @@
 
 {% block body %}
 
+<h1 style = "text-align: center; color: white; margin-top: 5px;">Your Saved Songs</h1>
+<ul>
+    <div style = "display: block;" >
+      {% for i in range(50) %}
+      <li>
+    
+        <table class = "centerTab">
+          <col >
+          <col style="width:5%">
+          <col style="width:50%">
+          <col style="width:40%">
+          <td><p class = "tableCols" > {{i + 1}} </p></td>
+        <td><img src = "{{ songs[i]['track']['album']['images'][0]['url'] }}" width = 200 height = auto class = "tableCols"></td> <!-- song picture-->
+          <td> <p class = "tableCols"><a href = "{{ songs[i]['track']['external_urls']['spotify'] }}"> {{ songs[i]['track']['name'] }}</a></p></td> <!--name and link to song-->
+          <td> <p class = "tableCols" > {{ songs[i]['track']['artists'][0]['name'] }}</p></td> <!-- artist-->
+        </table>
+     
+      </li>
+
+      
+      {% endfor %}
+
+</ul>
 {% endblock %}

@@ -118,3 +118,21 @@ if __name__ == '__main__':
     app.run()
 
 
+@app.get("/SavedSongs")
+def savedSongs():
+    scope = 'user-library-read'
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))    
+
+    songsOrTracks = sp.current_user_saved_tracks(limit = 50)
+
+    print(songsOrTracks['items'][0]['track']['external_urls']['spotify'])
+    return render_template("SavedSongs.html", songs = songsOrTracks['items'])
+
+@app.get("/SavedAlbums")
+def savedAlbum():
+    scope = 'user-library-read'
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+    albums = sp.current_user_saved_albums(limit = 50)
+
+
+    return render_template("SavedAlbums.html", albums = albums, sp = sp)
